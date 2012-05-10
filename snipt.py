@@ -18,7 +18,7 @@ class SyncSniptCommand(sublime_plugin.TextCommand):
             if (not self.userid):
                 sublime.error_message('No snipt.net userid. You must first set you userid in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
                 return
-        elif (self.apimode == "public"):
+        elif (self.apimode == "private"):
             if (not self.username):
                 sublime.error_message('No snipt.net username. You must first set you username in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
                 return
