@@ -30,7 +30,7 @@
                         [
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/snipt/Snipt.sublime-settings"},
+                                "args": {"file": "${packages}/Sublime-Snipt/Snipt.sublime-settings"},
                                 "caption": "Settings"
                             }
                         ]
