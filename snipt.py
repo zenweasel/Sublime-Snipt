@@ -10,21 +10,21 @@ class SyncSniptCommand(sublime_plugin.TextCommand):
         self.userid = self.settings.get('snipt_userid')
         self.apimode = self.settings.get('snipt_apimode')
 
-        if (not self.apikey):
-            sublime.error_message('No snipt.net apikey. You must first set you apikey in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
-            return
-        
-        if (not self.userid):
-            sublime.error_message('No snipt.net userid. You must first set you userid in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
-            return
-        
-        if (not self.username):
-            sublime.error_message('No snipt.net username. You must first set you username in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
-            return
-
         if (not self.apimode):
             sublime.error_message('No snipt.net apimode. You must first set you API mode in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
             return
+
+        if (self.apimode == "public"):
+            if (not self.userid):
+                sublime.error_message('No snipt.net userid. You must first set you userid in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
+                return
+        elif (self.apimode == "public"):
+            if (not self.username):
+                sublime.error_message('No snipt.net username. You must first set you username in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
+                return
+            if (not self.apikey):
+                sublime.error_message('No snipt.net apikey. You must first set you apikey in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
+                return
 
     def run(self, edit):
         # check for userinfos config
