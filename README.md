@@ -2,6 +2,9 @@
 Sublime Snipt is a Sublime Text 2 plugin that will sync with snipt.net. Once activated it will download all of your snipts from snipt.net and turn each of them into a sublime snippet.
 
 ## Installation
+### Package Control
+If you have [Package Control](http://wbond.net/sublime_packages/package_control) installed, just search for "Snipt.net" and install it.
+
 ### Using Git
 Go to your Sublime Text 2 Packages directory and clone the repository using the command below:
     
