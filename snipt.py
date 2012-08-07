@@ -60,7 +60,11 @@ class SyncSniptCommand(sublime_plugin.TextCommand):
                 # lets turn wine (snipts) into water (sublime snippets)
                 buildfile = sublime.packages_path()+'/Sublime-Snipt/repo/{0}.sublime-snippet'.format(cleantitle[0:20])
                 newfile = open(buildfile,'w+')
-                newfile.write('<snippet><content><![CDATA[{0}]]></content><tabTrigger>snipt</tabTrigger></snippet>'.format(code))
+                # escape snipts that start with '$'
+                if code[0] == "$": 
+                    newfile.write('<snippet><content><![CDATA[\{0}]]></content><tabTrigger>snipt</tabTrigger></snippet>'.format(code))
+                else:
+                    newfile.write('<snippet><content><![CDATA[{0}]]></content><tabTrigger>snipt</tabTrigger></snippet>'.format(code))
                 newfile.close()
 
 
