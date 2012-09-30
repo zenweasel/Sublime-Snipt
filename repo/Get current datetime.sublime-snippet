@@ -1,0 +1,2 @@
+<snippet><content><![CDATA[java.util.Date date = new java.util.Date();
+Timestamp timestamp = new Timestamp(date.getTime());]]></content><tabTrigger>snipt</tabTrigger></snippet>

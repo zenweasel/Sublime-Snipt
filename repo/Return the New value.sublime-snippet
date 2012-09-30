@@ -1,0 +1,19 @@
+<snippet><content><![CDATA[    public static String getExistingOrNew(String existingString, String newString) {
+        if(existingString == null && newString == null) {
+            return existingString;
+        }
+        if((newString != null) && (existingString == null)) {
+            return newString;
+        }
+        // This is really the key piece. If the "new value" is really a null
+        // don't replace an existing non-null value
+        if((newString == null) && (existingString != null)) {
+            return existingString;
+        }
+        // We could just return newString here, but I prefer the extra verbosity for now
+        if(newString.equals(existingString)) {
+            return newString;
+        } else {
+            return newString;
+        }
+    }]]></content><tabTrigger>snipt</tabTrigger></snippet>

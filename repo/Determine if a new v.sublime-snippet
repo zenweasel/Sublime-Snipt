@@ -1,0 +1,18 @@
+<snippet><content><![CDATA[    public static boolean hasChanged(String existingString, String newString) {
+        if(existingString == null && newString == null) {
+            return false;
+        }
+        if((newString != null) && (existingString == null)) {
+            return true;
+        }
+
+        if((newString == null) && (existingString != null)) {
+            return false;
+        }
+
+        if(newString.equals(existingString)) {
+            return false;
+        } else {
+            return true;
+        }
+    }]]></content><tabTrigger>snipt</tabTrigger></snippet>

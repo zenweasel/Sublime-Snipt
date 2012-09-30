@@ -4,15 +4,20 @@ class SyncSniptCommand(sublime_plugin.TextCommand):
 
     def get_userinfos(self):
         # snipt plugin settings
-        self.settings = sublime.load_settings("Snipt.sublime-settings")
+        self.settings = sublime.load_settings("snipt.sublime-settings")
         self.username = self.settings.get('snipt_username')
         self.apikey = self.settings.get('snipt_apikey')
         self.userid = self.settings.get('snipt_userid')
         self.apimode = self.settings.get('snipt_apimode')
+        self.reponame = self.settings.get('snipt_repopath')
 
         if (not self.apimode):
             sublime.error_message('No snipt.net apimode. You must first set you API mode in: Sublime Text2 ~> Preferences ~> Package Settings ~> Snipt Tools ~> Settings')
             return
+
+        if not self.reponame:
+            #If not set, use the name set in the Instructions
+            self.reponame = 'snipt'
 
         if (self.apimode == "public"):
             if (not self.userid):
@@ -33,6 +38,7 @@ class SyncSniptCommand(sublime_plugin.TextCommand):
         apikey = self.apikey
         userid = self.userid
         apimode = self.apimode
+        reponame = self.reponame
 
         # grab the user data
         try:
@@ -41,7 +47,7 @@ class SyncSniptCommand(sublime_plugin.TextCommand):
             else:
                 response = urllib2.urlopen('https://snipt.net/api/private/snipt/?username={0}&api_key={1}&format=json'.format(username, apikey))
         except urllib2.URLError, (err):
-            sublime.error_message("Connection refused. Try again later. Snipt step: 1"+err)
+            sublime.error_message("Connection refused. Try again later. Snipt step: 1" + str(err))
             return
             
         # grab all user snipt #'s
@@ -58,8 +64,12 @@ class SyncSniptCommand(sublime_plugin.TextCommand):
             
             if (code):
                 # lets turn wine (snipts) into water (sublime snippets)
-                buildfile = sublime.packages_path()+'/Sublime-Snipt/repo/{0}.sublime-snippet'.format(cleantitle[0:20])
-                newfile = open(buildfile,'w+')
+                buildfile = sublime.packages_path()+'/{0}/repo/{1}.sublime-snippet'.format(self.reponame, cleantitle[0:20])
+                try:
+                    newfile = open(buildfile,'w+')
+                except IOError, e:
+                    sublime.error_message("Could not create file {0}".format(buildfile))
+                    return
                 # escape snipts that start with '$'
                 if code[0] == "$": 
                     newfile.write('<snippet><content><![CDATA[\{0}]]></content><tabTrigger>snipt</tabTrigger></snippet>'.format(code))
