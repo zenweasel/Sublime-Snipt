@@ -35,3 +35,8 @@ All snipt.net snippets can be called up as you type "snipt" in the Sublime edito
 + Select and Highlight text to send to snipt.net
 + Python: thread snipt downloading
 + ~~Escape Snipts that include CDATA~~
+=======
+Sublime-Snipt for Brent
+=============
+
+A Version of the Sublime-Snipt Package that works for me
